@@ -1,0 +1,20 @@
+services:
+  # ---------- FRONTEND (React Static Site) ----------
+  - type: static_site
+    name: frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # ---------- BACKEND (Node / Express API) ----------
+  - type: web
+    name: backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run start
